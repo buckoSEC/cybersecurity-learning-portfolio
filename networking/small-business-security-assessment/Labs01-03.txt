@@ -1,0 +1,140 @@
+# CISCO PACKET TRACER — LABS 01–03
+Date: 04/11/2026
+Project: Small Business Network Security Assessment
+
+## LAB 01 — BASIC LAN CONFIGURATION
+
+**Goal:** Build a functioning LAN and configure IPv4 connectivity.
+
+**Topology:**
+- 1 Cisco 2911 Router
+- 1 Cisco 2960 Switch
+- 2 PCs
+
+**Configuration:**
+- Router G0/0: 192.168.10.1/24
+- PC1: 192.168.10.10/24
+- PC2: 192.168.10.11/24
+- Gateway: 192.168.10.1
+
+**Tasks completed:**
+- Connected devices using Ethernet.
+- Assigned static IPv4 addresses.
+- Configured the router through Cisco IOS.
+- Enabled the interface using `no shutdown`.
+- Verified connectivity using `ping`.
+- Saved the router configuration.
+
+**Key learning:**
+- Switches forward frames using MAC addresses.
+- Routers forward packets between IP networks.
+- Devices on the same subnet communicate without routing.
+- Cisco IOS uses different command modes.
+- `show ip interface brief` displays interface status.
+- `copy running-config startup-config` saves configuration.
+
+**Result:** LAN operational. Both PCs successfully pinged the router and each other.
+
+---
+
+## LAB 02 — DHCP CONFIGURATION
+
+**Goal:** Automate IPv4 address allocation using the router.
+
+**Configuration:**
+- Created DHCP pool: OFFICE-LAN
+- Network: 192.168.10.0/24
+- Default gateway: 192.168.10.1
+- Excluded addresses: 192.168.10.1–50
+
+**Tasks performed:**
+- Configured a DHCP pool on R1.
+- Switched both PCs from static addressing to DHCP.
+- Investigated why the original IP addresses were reassigned.
+- Modified the excluded address range.
+- Explored DHCP lease renewal and binding verification.
+
+**Commands learned:**
+- `ip dhcp pool OFFICE-LAN`
+- `ip dhcp excluded-address`
+- `show ip dhcp binding`
+- `ipconfig /release`
+- `ipconfig /renew`
+
+**Key learning:**
+- DHCP automatically supplies network configuration.
+- Exclusions reserve addresses from dynamic allocation.
+- Existing leases may persist after changing exclusions.
+- Routers can provide DHCP services to LAN clients.
+
+**Result:** DHCP configured; address exclusions and lease behaviour investigated.
+
+---
+
+## LAB 03 — VLANS, ROUTING & ACLS
+
+**Goal:** Segment a network and control communication between VLANs.
+
+**Network design:**
+- VLAN 10: STAFF — 192.168.10.0/24
+- VLAN 20: GUEST — 192.168.20.0/24
+- PC1 assigned to switch Fa0/1 (VLAN 10).
+- PC2 assigned to switch Fa0/2 (VLAN 20).
+
+**Part 1 — VLAN Configuration**
+- Created VLANs 10 and 20.
+- Assigned switch access ports to each VLAN.
+- Tested Layer 2 isolation.
+- Verified using `show vlan brief`.
+
+**Part 2 — Inter-VLAN Routing**
+- Configured switch G0/1 as an 802.1Q trunk.
+- Created router subinterfaces G0/0.10 and G0/0.20.
+- Assigned each subinterface its VLAN gateway IP.
+- Verified using `show interfaces trunk`.
+- Successfully pinged between the two VLANs.
+
+**Part 3 — Access Control Lists**
+- Created named extended ACL: GUEST-IN.
+- Denied traffic from GUEST to STAFF.
+- Permitted other IPv4 traffic.
+- Applied ACL inbound on router G0/0.20.
+
+**ACL verification:**
+- Deny rule: 8 matches.
+- Permit rule: 4 matches.
+
+**Key learning:**
+- VLANs create separate Layer 2 broadcast domains.
+- ARP broadcasts do not cross VLAN boundaries.
+- Trunk links carry multiple VLANs using 802.1Q.
+- Router subinterfaces enable inter-VLAN routing.
+- Extended ACLs filter traffic by source, destination
+  and protocol.
+- ACL direction (in/out) determines where filtering occurs.
+- ACLs have an implicit deny rule.
+- Standard IOS ACLs are stateless.
+
+**Result:** VLAN segmentation, inter-VLAN routing and guest traffic restrictions 
+successfully demonstrated.
+
+---
+
+## OVERALL PROGRESS
+
+**Technical skills practised:**
+- IPv4 addressing and subnetting
+- Cisco IOS configuration
+- Switching and routing
+- DHCP administration
+- VLANs and 802.1Q trunking
+- Router-on-a-stick
+- Extended ACL configuration
+- ICMP connectivity testing
+- Network troubleshooting
+
+**Next objective:**
+Lab 04 — Linux Network Discovery & Security Auditing
+
+Use Kali, Nmap and Wireshark to inspect network services, analyse traffic and document
+security findings.
