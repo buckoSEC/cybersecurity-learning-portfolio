@@ -64,7 +64,7 @@ This portfolio documents my progression in cybersecurity, with an emphasis on ha
 
 **OverTheWire — Bandit**
 
-- Progressed through approximately the first 14 levels.
+- Progressed through first 15+ levels.
 - Strengthened Linux command-line proficiency and problem-solving skills.
 - Gained practical exposure to SSH, file permissions, text processing, and data manipulation.
 
