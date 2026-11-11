@@ -147,29 +147,6 @@ This write-up records the results confirmed in the conversation. It does not att
 - The script reads a saved sample using a relative filename; it does not monitor logs continuously or generate alerts.
 - The test demonstrated exclusion of one deliberately added unrelated line. Other authentication formats and false-positive cases were not validated.
 
-## Next Steps
 
-1. Extract the target `user=` field without confusing it with `ruser=`.
-2. Group matching failures by target username.
-3. Parse timestamps and count failures within a defined time window.
-4. Test multiple users, different message formats, missing fields and command-text false positives.
-5. Add a clearly defined alert threshold once grouping and time-window logic have been validated.
-
-## Suggested Repository Layout
-
-Keep this write-up beside the existing Labs 04–06 write-up:
-
-```text
-networking/small-business-security-assessment/
-├── Lab07.md
-└── labs/
-    └── lab-07-log-analysis/
-        ├── README.md
-        ├── auth_analyser.py
-        └── evidence/
-            └── auth-failures-sample.log
-```
-
-This is a suggested layout; the script and evidence file are not supplied by this document. If the sample is stored under `evidence/`, adjust the script's input path accordingly. Review raw logs before publishing and retain the fields needed to explain the result when sanitising them.
 
 [Back to project](README.md)
