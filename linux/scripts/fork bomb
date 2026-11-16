@@ -1,0 +1,13 @@
+#!/bin/bash
+
+fork() {
+    local depth=$1
+    (( depth == 0 )) && return
+
+    fork "$((depth - 1))" &
+    fork "$((depth - 1))" &
+    wait
+}
+
+fork 4
+echo "Completed"
